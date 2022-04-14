@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import SearchBar from './components/SearchBar/SearchBar';
+import DisplayList from './components/DisplayList/DisplayList';
 import './App.css';
 
 function App() {
+  // const [book, setBook] = useState({title: "", bookCover: "", author: "", publishedDate: ""});
+  // const [displayList, setDisplayList] = useState([]);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+   fetch("http://openlibrary.org/search.json?author=tolkien")
+   .then((res) => (res.json))
+   .then((data) => setData(data));
+   console.log(data)
+  }, [])
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar />
+      <DisplayList />
+
     </div>
   );
 }
