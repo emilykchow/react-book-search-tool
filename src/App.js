@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import SearchBar from "../src/components/SearchBar/SearchBar.jsx"
+import DisplayList from "./components/DisplayList/DisplayList";
 
 function App() {
 	const [data, setData] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
-	const [search, setSearch] = useState("");
+	const [searchedItem, setSearchedItem] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
@@ -30,54 +31,12 @@ function App() {
 		return null;
 	}
 
-	let x = data.docs;
-	let y = data.docs;
 
-	const searchHandler = (search) => {
-		setSearch(search);
-		if (search !== "") {
-			const newBooksList = y.filter((i) => {
-				return Object.values(i)
-					.join(" ")
-					.toLowerCase()
-					.includes(search.toLowerCase());
-			});
-			setSearchResults(newBooksList);
-		} else {
-			setSearchResults(y);
-		}
-	};
-
-	console.log(searchResults);
 
 	return (
 		<div className="container">
-			<SearchBar searchedItem={search} searchHandler={searchHandler} />
-			{search.length < 1 ? (
-				<ul className="list">
-					{x.map((item, i) => {
-						return (
-							<li key={i} className="list-item">
-								<i className="fa fa-book"></i>
-								&nbsp;
-								{item.title}
-							</li>
-						);
-					})}
-				</ul>
-			) : (
-				<ul className="list">
-					{searchResults.map((item, i) => {
-						return (
-							<li key={i} className="list-item">
-								<i className="fa fa-book"></i>
-								&nbsp;
-								{item.title}
-							</li>
-						);
-					})}
-				</ul>
-			)}
+			<SearchBar data={data} searchedItem={searchedItem} setSearchedItem={setSearchedItem} setSearchResults={setSearchResults} />
+			<DisplayList data={data} searchedItem={searchedItem} searchResults={searchResults}/>
 		</div>
 	);
 }
