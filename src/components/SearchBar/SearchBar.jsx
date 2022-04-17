@@ -1,31 +1,31 @@
-import React from 'react'
+import React from 'react';
+import "../../App.css";
 
 const SearchBar = ({data, searchedItem, setSearchedItem, searchResults, setSearchResults}) => {
 
+	const searchHandler = (e) => {
+        const searchWord = e.target.value;
+        setSearchedItem(searchWord);
 
-    let y = data.docs;
+        const newFilter = data.docs.filter((value) => {
+          return value.title.toLowerCase().includes(searchWord.toLowerCase());
+        });
+        if (searchWord === "") {
+          setSearchResults([]);
+        } else {
+          setSearchResults(newFilter);
+        }
+      };
 
-	const searchHandler = (searchedItem) => {
-		setSearchedItem(searchedItem);
-		if (searchedItem !== "") {
-			const newBooksList = y.filter((i) => {
-				return Object.values(i)
-					.join(" ")
-					.toLowerCase()
-					.includes(searchedItem.toLowerCase());
-			});
-			setSearchResults(newBooksList);
-		} else {
-			setSearchResults(y);
-		}
-	};
-
-	console.log(searchResults);
+      const clearInput = () => {
+        setSearchResults([]);
+        setSearchedItem("");
+      };
 
   return (
     <div className="SearchBar-wrapper">
-        <input placeholder="Search a book" value={searchedItem} onchange={(e) => e.target.value}/>
-        <button>Search</button>
+        <input placeholder="Search a book" value={searchedItem} onChange={searchHandler}/>
+        <button onClick={clearInput}>Clear</button>
     </div>
   )
 }

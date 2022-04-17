@@ -4,7 +4,7 @@ import SearchBar from "../src/components/SearchBar/SearchBar.jsx"
 import DisplayList from "./components/DisplayList/DisplayList";
 
 function App() {
-	const [data, setData] = useState("");
+	const [data, setData] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [searchedItem, setSearchedItem] = useState("");
