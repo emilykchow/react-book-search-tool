@@ -10,14 +10,42 @@ function App() {
 	const [searchedItem, setSearchedItem] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 
-	useEffect(() => {
-		setLoading(true);
+	// useEffect(() => {
+	// 	setLoading(true);
+	// 	fetch("http://openlibrary.org/search.json?author=tolkien")
+	// 		.then((response) => response.json())
+	// 		.then((data) => setData(data))
+	// 		.then(() => setLoading(false))
+	// 		.catch((error) => setError(error));
+	// }, []);
+
+	const InitialFetch = () => {
 		fetch("http://openlibrary.org/search.json?author=tolkien")
 			.then((response) => response.json())
 			.then((data) => setData(data))
 			.then(() => setLoading(false))
-			.catch(setError);
+			.catch((error) => setError(error));
+	};
+
+	useEffect(() => {
+		setLoading(true);
+		InitialFetch();
 	}, []);
+
+	useEffect(() => {
+		if (searchedItem.length) {
+			setLoading(true);
+			const formattedSearch = searchedItem.split(/[ ,]+/).join("+");
+			fetch(`http://openlibrary.org/search.json?q=${formattedSearch}`)
+				.then((res) => res.json())
+				.then((data) => setData(data))
+				.then(() => setLoading(false))
+				.catch((error) => setError(error));
+		} else {
+			InitialFetch();
+		}
+	}, [searchedItem]);
+
 
 	if (loading) {
 		return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
@@ -31,6 +59,7 @@ function App() {
 		return null;
 	}
 
+	
 
 
 	return (
