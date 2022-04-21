@@ -1,0 +1,32 @@
+.list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.list-item {
+    height: 300px;
+
+}
+
+.left-book-cover {
+    height: 100%;
+}
+
+.left-book-cover img {
+    height: 100%;
+    width: 200px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 500%) {
+    .list-wrapper {
+        grid-template-columns: repeat( 1, 1fr);
+    }
+
+    .list-item {
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+    }
+}
