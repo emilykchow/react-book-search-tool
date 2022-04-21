@@ -1,5 +1,6 @@
 import React from 'react';
 import "../../App.css";
+import "./SearchBar.css";
 
 const SearchBar = ({data, searchedItem, setSearchedItem, searchResults, setSearchResults}) => {
 

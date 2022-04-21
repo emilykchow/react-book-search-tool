@@ -1,0 +1,15 @@
+.list-wrapper {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	width: 90%;
+	justify-content: center;
+}
+
+.list-item {
+	height: 300px;
+	display: flex;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	margin: 10px;
+	height: 85%;
+}

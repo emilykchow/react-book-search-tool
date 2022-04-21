@@ -1,21 +1,38 @@
-import React from 'react';
+import React from "react";
 import "../../App.css";
+import "./DisplayList.css";
 
-const DisplayList = ({data, searchedItem, searchResults}) => {
-  let x = data.docs;
-  return (
-    <div>
-      {searchedItem.length < 1 ? (
+const DisplayList = ({ data, searchedItem, searchResults }) => {
+	let x = data.docs;
+	console.log(x);
+	return (
+		<div>
+			{searchedItem.length < 1 ? (
 				<ul className="list-wrapper">
-					{x.map((item, i) => {
-						return (
-							<li key={i} className="list-item">
-								<i className="fa fa-book"></i>
-								&nbsp;
-								{item.title}
-							</li>
-						);
-					})}
+					{x &&
+						x.map((item, i) => {
+							return (
+								<li key={i} className="list-item">
+									{/* <i className="fa fa-book"></i> */}
+									<div className="left-book-cover">
+										{/* <img src="https://covers.openlibrary.org/b/isbn/9780385533225-M.jpg" /> */}
+										<img
+											src={`https://covers.openlibrary.org/b/isbn/${
+												item.isbn !== undefined ? item.isbn[1] : "3129081801"
+											}-M.jpg`}
+											alt={`${item.title}`}
+										/>
+										{/* <img src="https://covers.openlibrary.org/b/isbn/9780385533225-S.jpg" alt="Cover of: Search results" title="Cover of: Search results"></img> */}
+									</div>
+
+									<div className="right-book-description">
+										<h4>{item.title} </h4>
+										<p>By: {item.author_name}</p>
+										<p>Publish Date: {item.publish_date[0]}</p>
+									</div>
+								</li>
+							);
+						})}
 				</ul>
 			) : (
 				<ul className="list-wrapper">
@@ -30,8 +47,8 @@ const DisplayList = ({data, searchedItem, searchResults}) => {
 					})}
 				</ul>
 			)}
-    </div>
-  )
-}
+		</div>
+	);
+};
 
 export default DisplayList;
