@@ -2,13 +2,13 @@ import React from 'react';
 import "../../App.css";
 import "./SearchBar.css";
 
-const SearchBar = ({data, searchedItem, setSearchedItem, searchResults, setSearchResults}) => {
+const SearchBar = ({data, searchedItem, setSearchedItem, searchResults, setSearchResults, setData}) => {
 
 	const searchHandler = (e) => {
         const searchWord = e.target.value;
         setSearchedItem(searchWord);
 
-        const newFilter = data.docs.filter((value) => {
+        const newFilter = data.filter((value) => {
           return value.title.toLowerCase().includes(searchWord.toLowerCase());
         });
         if (searchWord === "") {
@@ -19,6 +19,7 @@ const SearchBar = ({data, searchedItem, setSearchedItem, searchResults, setSearc
       };
 
       const clearInput = () => {
+        setData([])
         setSearchResults([]);
         setSearchedItem("");
       };
