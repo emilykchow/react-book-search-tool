@@ -22,3 +22,6 @@ b.	If you didn't spend much time on the coding test, then use this as an opportu
         personality: ["warm", "friendly", "hard-working", "passionate", "good work ethics"]
     }
 ]
+
+https://github.com/emilykchow/react-book-search-tool
+https://react-book-search-tool.netlify.app/
