@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
 import "./App.css";
 import SearchBar from "../src/components/SearchBar/SearchBar.jsx"
 import DisplayList from "./components/DisplayList/DisplayList";
-import { addBooks } from "./redux/booksReducer";
+
 
 function App() {
 	const [data, setData] = useState([]);
